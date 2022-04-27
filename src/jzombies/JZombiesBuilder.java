@@ -3,9 +3,12 @@ package jzombies;
 import repast.simphony.context.Context;
 import repast.simphony.context.space.continuous.ContinuousSpaceFactory;
 import repast.simphony.context.space.continuous.ContinuousSpaceFactoryFinder;
+import repast.simphony.context.space.graph.NetworkBuilder;
 import repast.simphony.context.space.grid.GridFactory;
 import repast.simphony.context.space.grid.GridFactoryFinder;
 import repast.simphony.dataLoader.ContextBuilder;
+import repast.simphony.engine.environment.RunEnvironment;
+import repast.simphony.parameter.Parameters;
 import repast.simphony.random.RandomHelper;
 import repast.simphony.space.continuous.ContinuousSpace;
 import repast.simphony.space.continuous.NdPoint;
@@ -19,6 +22,9 @@ public class JZombiesBuilder implements ContextBuilder<Object> {
 
 	@Override
 	public Context build(Context<Object> context) {
+		NetworkBuilder<Object> netBuilder = new NetworkBuilder<Object>("infection network", context, true);
+		netBuilder.buildNetwork();
+		
 		context.setId("jzombies");
 		
 		ContinuousSpaceFactory spaceFactory = 
@@ -35,13 +41,14 @@ public class JZombiesBuilder implements ContextBuilder<Object> {
 						new SimpleGridAdder<Object>(),
 						true, 50, 50));
 		
-		int zombieCount = 5;
+		Parameters params = RunEnvironment.getInstance().getParameters();
+		int zombieCount = params.getInteger("zombie_count");
 		for (int i = 0; i < zombieCount; i++) {
 			context.add(new Zombie(space, grid));
 			
 		}
 		
-		int humanCount = 100;
+		int humanCount = params.getInteger("human_count");
 		for (int i = 0; i < humanCount; i++) {
 			int energy = RandomHelper.nextIntFromTo(4, 10);
 			context.add(new Human(space, grid, energy));
