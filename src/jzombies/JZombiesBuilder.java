@@ -12,51 +12,55 @@ import repast.simphony.parameter.Parameters;
 import repast.simphony.random.RandomHelper;
 import repast.simphony.space.continuous.ContinuousSpace;
 import repast.simphony.space.continuous.NdPoint;
-import repast.simphony.space.continuous.RandomCartesianAdder;
+import repast.simphony.space.continuous.SimpleCartesianAdder;
 import repast.simphony.space.grid.Grid;
 import repast.simphony.space.grid.GridBuilderParameters;
 import repast.simphony.space.grid.SimpleGridAdder;
-import repast.simphony.space.grid.WrapAroundBorders;
+
+/**
+ * @author Philipp Flügger 1361053, Patrick Mertes 1368734, Nhat Tran 1373869
+ *
+ */
 
 public class JZombiesBuilder implements ContextBuilder<Object> {
 
 	@Override
 	public Context build(Context<Object> context) {
-		NetworkBuilder<Object> netBuilder = new NetworkBuilder<Object>("infection network", context, true);
-		netBuilder.buildNetwork();
-		
 		context.setId("jzombies");
 		
+		// replace RandomCartesianAdder with SimpleCartesianAdder
+		// replace WrapAroundBorders with StrictBorders
 		ContinuousSpaceFactory spaceFactory = 
 				ContinuousSpaceFactoryFinder.createContinuousSpaceFactory(null);
 		ContinuousSpace<Object> space = 
 				spaceFactory.createContinuousSpace("space", context, 
-						new RandomCartesianAdder<Object>(),
-						new repast.simphony.space.continuous.WrapAroundBorders(),
+						new SimpleCartesianAdder<Object>(),
+						new repast.simphony.space.continuous.StrictBorders(),
 						50, 50);
 		
 		GridFactory gridFactory = GridFactoryFinder.createGridFactory(null);
 		Grid<Object> grid = gridFactory.createGrid("grid", context, 
-				new GridBuilderParameters<Object>(new WrapAroundBorders(),
+				new GridBuilderParameters<Object>(new repast.simphony.space.grid.StrictBorders(),
 						new SimpleGridAdder<Object>(),
 						true, 50, 50));
 		
+		// add zombie/robot to context and initialize position
 		Parameters params = RunEnvironment.getInstance().getParameters();
 		int zombieCount = params.getInteger("zombie_count");
 		for (int i = 0; i < zombieCount; i++) {
-			context.add(new Zombie(space, grid));
-			
+			Zombie zombie = new Zombie(space, grid);
+			context.add(zombie);
+			grid.moveTo(zombie, 4, 4);
+			space.moveTo(zombie, 4, 4);
 		}
 		
+		// add human/carrier to context and initialize position 
 		int humanCount = params.getInteger("human_count");
 		for (int i = 0; i < humanCount; i++) {
-			int energy = RandomHelper.nextIntFromTo(4, 10);
-			context.add(new Human(space, grid, energy));
-		}
-		
-		for (Object obj : context) {
-			NdPoint pt = space.getLocation(obj);
-			grid.moveTo(obj, (int)pt.getX(), (int)pt.getY());
+			Human human = new Human(space, grid);
+			context.add(human);
+			grid.moveTo(human, 5, 5);
+			space.moveTo(human, 5, 5);
 		}
 		
 		return context;

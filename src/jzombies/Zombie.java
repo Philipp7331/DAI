@@ -21,7 +21,7 @@ import repast.simphony.util.ContextUtils;
 import repast.simphony.util.SimUtilities;
 
 /**
- * @author Philipp Flügger
+ * @author Philipp Flügger 1361053, Patrick Mertes 1368734, Nhat Tran 1373869
  *
  */
 public class Zombie {
@@ -37,14 +37,17 @@ public class Zombie {
 	
 	@ScheduledMethod(start = 1, interval = 1)
 	public void step() {
+		// we reuse the zombie logic to make the "robot" follow the mail carrier
 		// get the grid location of this Zombie
 		GridPoint pt = grid.getLocation(this);
 		
 		// use the GridCellNgh class to create GridCells for surrounding neighborhood
-		GridCellNgh<Human> nghCreator = new GridCellNgh<Human>(grid, pt, Human.class, 1, 1);
+		// extend the search radius to the size of the grid
+		GridCellNgh<Human> nghCreator = new GridCellNgh<Human>(grid, pt, Human.class, 50, 50);
 		List<GridCell<Human>> gridCells = nghCreator.getNeighborhood(true);
 		SimUtilities.shuffle(gridCells, RandomHelper.getUniform());
 		
+		// we don't change this logic because it works perfectly fine for one carrier and one robot
 		GridPoint pointWithMostHumans = null;
 		int maxCount = -1;
 		for (GridCell<Human> cell : gridCells) {
@@ -54,7 +57,6 @@ public class Zombie {
 			}
 		}
 		moveTowards(pointWithMostHumans);
-		infect();
 	}
 	
 	public void moveTowards(GridPoint pt) {
@@ -68,30 +70,6 @@ public class Zombie {
 			grid.moveTo(this, (int)myPoint.getX(), (int)myPoint.getY());
 			
 			moved = true;
-		}
-	}
-	
-	public void infect() {
-		GridPoint pt = grid.getLocation(this);
-		List<Object> humans = new ArrayList<Object>();
-		for (Object obj : grid.getObjectsAt(pt.getX(), pt.getY())) {
-			if (obj instanceof Human) {
-				humans.add(obj);
-			}
-		}
-		if (humans.size() > 0) {
-			int index = RandomHelper.nextIntFromTo(0, humans.size() - 1);
-			Object obj = humans.get(index);
-			NdPoint spacePt = space.getLocation(obj);
-			Context<Object> context = ContextUtils.getContext(obj);
-			context.remove(obj);
-			Zombie zombie = new Zombie(space, grid);
-			context.add(zombie);
-			space.moveTo(zombie, spacePt.getX(), spacePt.getY());
-			grid.moveTo(zombie, pt.getX(), pt.getY());
-			
-			Network<Object> net = (Network<Object>)context.getProjection("infection network");
-			net.addEdge(this, zombie);
 		}
 	}
 }

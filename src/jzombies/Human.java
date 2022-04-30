@@ -3,8 +3,10 @@
  */
 package jzombies;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import repast.simphony.engine.schedule.ScheduledMethod;
 import repast.simphony.engine.watcher.Watch;
 import repast.simphony.engine.watcher.WatcherTriggerSchedule;
 import repast.simphony.query.space.grid.GridCell;
@@ -18,46 +20,37 @@ import repast.simphony.space.grid.GridPoint;
 import repast.simphony.util.SimUtilities;
 
 /**
- * @author Philipp
+ * @author Philipp Flügger 1361053, Patrick Mertes 1368734, Nhat Tran 1373869
  *
  */
 public class Human {
 	
 	private ContinuousSpace<Object> space;
 	private Grid<Object> grid;
-	private int energy, startingEnergy;
+	// save goals in an arraylist
+	private ArrayList<GridPoint> goals = new ArrayList<GridPoint>();
 	
-	public Human(ContinuousSpace<Object> space, Grid<Object> grid, int energy) {
+	public Human(ContinuousSpace<Object> space, Grid<Object> grid) {
 		this.space = space;
 		this.grid = grid;
-		this.energy = startingEnergy = energy;
+		// initialize goals (also possible with parameters)
+		this.goals.add(new GridPoint(10, 15));
+		this.goals.add(new GridPoint(30, 45));
+		this.goals.add(new GridPoint(10, 35));
+		this.goals.add(new GridPoint(5, 5));
 	}
 	
-	@Watch(watcheeClassName = "jzombies.Zombie", 
-		   watcheeFieldNames = "moved",
-		   query = "within_moore 1", 
-		   whenToTrigger = WatcherTriggerSchedule.IMMEDIATE)
+	// add a ScheduledMethod to the run method of the human instead of the watcher
+	@ScheduledMethod(start = 1, interval = 1)
 	public void run() {
-		// get the grid location of this Human
-		GridPoint pt = grid.getLocation(this);
-		// use the GridCellNgh class to create GridCells for the surrounding neighborhood
-		GridCellNgh<Zombie> nghCreator = new GridCellNgh<Zombie>(grid, pt, Zombie.class, 1, 1);
-		List<GridCell<Zombie>> gridCells = nghCreator.getNeighborhood(true);
-		SimUtilities.shuffle(gridCells, RandomHelper.getUniform());
-		
-		GridPoint pointWithLeastZombies = null;
-		int minCount = Integer.MAX_VALUE;
-		for (GridCell<Zombie> cell : gridCells) {
-			if (cell.size() < minCount) {
-				pointWithLeastZombies = cell.getPoint();
-				minCount = cell.size();
+		// if we have goals left we move towards them and remove if reached
+		if (!goals.isEmpty()) {
+			moveTowards(goals.get(0));
+			if (goals.get(0).equals(grid.getLocation(this))) {
+				goals.remove(0);
 			}
-		}
-		
-		if (energy > 0) {
-			moveTowards(pointWithLeastZombies);
 		} else {
-			energy = startingEnergy;
+			System.out.println("DONE");
 		}
 	}
 	
@@ -67,10 +60,10 @@ public class Human {
 			NdPoint myPoint = space.getLocation(this);
 			NdPoint otherPoint = new NdPoint(pt.getX(), pt.getY());
 			double angle = SpatialMath.calcAngleFor2DMovement(space, myPoint, otherPoint);
-			space.moveByVector(this, 2, angle, 0);
+			space.moveByVector(this, 1, angle, 0);
 			myPoint = space.getLocation(this);
-			grid.moveTo(this, (int)myPoint.getX(), (int)myPoint.getY());
-			energy--;
+			// we could Math.round values to avoid "jumping over" goals:
+			grid.moveTo(this, (int)myPoint.getX(), (int)myPoint.getY()); 
 		}
 	}
 }
