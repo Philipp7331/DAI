@@ -1,5 +1,7 @@
 package jzombies;
 
+import java.util.ArrayList;
+
 import repast.simphony.context.Context;
 import repast.simphony.context.space.continuous.ContinuousSpaceFactory;
 import repast.simphony.context.space.continuous.ContinuousSpaceFactoryFinder;
@@ -15,6 +17,7 @@ import repast.simphony.space.continuous.NdPoint;
 import repast.simphony.space.continuous.SimpleCartesianAdder;
 import repast.simphony.space.grid.Grid;
 import repast.simphony.space.grid.GridBuilderParameters;
+import repast.simphony.space.grid.GridPoint;
 import repast.simphony.space.grid.SimpleGridAdder;
 
 /**
@@ -23,10 +26,25 @@ import repast.simphony.space.grid.SimpleGridAdder;
  */
 
 public class JZombiesBuilder implements ContextBuilder<Object> {
+	
+	private ArrayList<GridPoint> initialMessengerPositions = new ArrayList<GridPoint>();
+	private ArrayList<GridPoint> customerPositions = new ArrayList<GridPoint>();
 
 	@Override
 	public Context build(Context<Object> context) {
 		context.setId("jzombies");
+		
+		initialMessengerPositions.add(new GridPoint(5, 5));
+		initialMessengerPositions.add(new GridPoint(45, 5));
+		initialMessengerPositions.add(new GridPoint(5, 25));
+		initialMessengerPositions.add(new GridPoint(45, 45));
+		
+		customerPositions.add(new GridPoint(15, 10));
+		customerPositions.add(new GridPoint(5, 35));
+		customerPositions.add(new GridPoint(40, 10));
+		customerPositions.add(new GridPoint(35, 45));
+		customerPositions.add(new GridPoint(40, 35));
+		customerPositions.add(new GridPoint(45, 45));
 		
 		// replace RandomCartesianAdder with SimpleCartesianAdder
 		// replace WrapAroundBorders with StrictBorders
@@ -50,8 +68,8 @@ public class JZombiesBuilder implements ContextBuilder<Object> {
 		for (int i = 0; i < zombieCount; i++) {
 			Zombie zombie = new Zombie(space, grid);
 			context.add(zombie);
-			grid.moveTo(zombie, 4, 4);
-			space.moveTo(zombie, 4, 4);
+			grid.moveTo(zombie, initialMessengerPositions.get(i).getX(), initialMessengerPositions.get(i).getY());
+			space.moveTo(zombie, initialMessengerPositions.get(i).getX(), initialMessengerPositions.get(i).getY());
 		}
 		
 		// add human/carrier to context and initialize position 
@@ -59,8 +77,8 @@ public class JZombiesBuilder implements ContextBuilder<Object> {
 		for (int i = 0; i < humanCount; i++) {
 			Human human = new Human(space, grid);
 			context.add(human);
-			grid.moveTo(human, 5, 5);
-			space.moveTo(human, 5, 5);
+			grid.moveTo(human, customerPositions.get(i).getX(), customerPositions.get(i).getY());
+			space.moveTo(human, customerPositions.get(i).getX(), customerPositions.get(i).getY());
 		}
 		
 		return context;

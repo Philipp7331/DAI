@@ -33,11 +33,6 @@ public class Human {
 	public Human(ContinuousSpace<Object> space, Grid<Object> grid) {
 		this.space = space;
 		this.grid = grid;
-		// initialize goals (also possible with parameters)
-		this.goals.add(new GridPoint(10, 15));
-		this.goals.add(new GridPoint(30, 45));
-		this.goals.add(new GridPoint(10, 35));
-		this.goals.add(new GridPoint(5, 5));
 	}
 	
 	// add a ScheduledMethod to the run method of the human instead of the watcher
