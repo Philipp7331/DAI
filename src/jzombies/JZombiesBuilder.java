@@ -44,7 +44,7 @@ public class JZombiesBuilder implements ContextBuilder<Object> {
 		customerPositions.add(new GridPoint(40, 10));
 		customerPositions.add(new GridPoint(35, 45));
 		customerPositions.add(new GridPoint(40, 35));
-		customerPositions.add(new GridPoint(45, 45));
+		customerPositions.add(new GridPoint(10, 35));
 		
 		// replace RandomCartesianAdder with SimpleCartesianAdder
 		// replace WrapAroundBorders with StrictBorders
