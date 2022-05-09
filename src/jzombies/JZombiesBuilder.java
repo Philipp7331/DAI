@@ -29,6 +29,8 @@ public class JZombiesBuilder implements ContextBuilder<Object> {
 	
 	private ArrayList<GridPoint> initialMessengerPositions = new ArrayList<GridPoint>();
 	private ArrayList<GridPoint> customerPositions = new ArrayList<GridPoint>();
+	
+	private ArrayList<Zombie> zombieList = new ArrayList<Zombie>();
 
 	@Override
 	public Context build(Context<Object> context) {
@@ -66,10 +68,19 @@ public class JZombiesBuilder implements ContextBuilder<Object> {
 		Parameters params = RunEnvironment.getInstance().getParameters();
 		int zombieCount = params.getInteger("zombie_count");
 		for (int i = 0; i < zombieCount; i++) {
-			Zombie zombie = new Zombie(space, grid);
-			context.add(zombie);
-			grid.moveTo(zombie, initialMessengerPositions.get(i).getX(), initialMessengerPositions.get(i).getY());
-			space.moveTo(zombie, initialMessengerPositions.get(i).getX(), initialMessengerPositions.get(i).getY());
+			if (i == 0) {
+				Zombie zombie = new Zombie(space, grid, true);
+				zombieList.add(zombie);
+				context.add(zombie);
+				grid.moveTo(zombie, initialMessengerPositions.get(i).getX(), initialMessengerPositions.get(i).getY());
+				space.moveTo(zombie, initialMessengerPositions.get(i).getX(), initialMessengerPositions.get(i).getY());
+			} else {
+				Zombie zombie = new Zombie(space, grid, false);
+				zombieList.add(zombie);
+				context.add(zombie);
+				grid.moveTo(zombie, initialMessengerPositions.get(i).getX(), initialMessengerPositions.get(i).getY());
+				space.moveTo(zombie, initialMessengerPositions.get(i).getX(), initialMessengerPositions.get(i).getY());
+			}
 		}
 		
 		// add human/carrier to context and initialize position 
