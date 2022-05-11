@@ -89,23 +89,23 @@ public class Messenger {
 		}
 
 		// accept proposal of messenger closest to the customer
-		for (Customer customer : customerList) {
-			Messenger closestMessenger = findClosestMessenger(customer);
-			mc.addMessage(new FIPA_Message(this.id, 
-										   closestMessenger.id, 
-										   FIPA_Performative.ACCEPT_PROPOSAL,
-										   String.valueOf(customer.getId())));
-
-			for (Messenger messenger : messengerList) {
-				if (messenger != closestMessenger) {
+		for (Messenger messenger : messengerList) {
+			//Messenger closestMessenger = findClosestMessenger(customer);
+			Customer closestCustomer = findClosestCustomer(messenger);
+			if (closestCustomer != null) {
+				if (findClosestMessenger(closestCustomer).equals(messenger)) {
 					mc.addMessage(new FIPA_Message(this.id, 
-												   messenger.id, 
-												   FIPA_Performative.REJECT_PROPOSAL,
-												   String.valueOf(customer.getId())));
+							   messenger.id, 
+							   FIPA_Performative.ACCEPT_PROPOSAL,
+							   String.valueOf(closestCustomer.getId())));
+				} else {
+					mc.addMessage(new FIPA_Message(this.id, 
+							   					   messenger.id, 
+							   					   FIPA_Performative.REJECT_PROPOSAL,
+							   					   String.valueOf(closestCustomer.getId())));
 				}
 			}
 		}
-
 	}
 
 	// checks if messengers all are idle (no nextGoal)
@@ -147,13 +147,32 @@ public class Messenger {
 
 	// returns the closest messenger using the getDistance method from current space
 	public Messenger findClosestMessenger(Customer customer) {
-		Messenger closestMessenger = messengerList.get(0);
-		for (Messenger messenger : messengerList) {
-			if (space.getDistance(space.getLocation(messenger), space.getLocation(customer)) < space
-					.getDistance(space.getLocation(closestMessenger), space.getLocation(customer))) {
-				closestMessenger = messenger;
+		if (customer != null) {
+			Messenger closestMessenger = messengerList.get(0);
+			for (Messenger messenger : messengerList) {
+				if (space.getDistance(space.getLocation(messenger), space.getLocation(customer)) < space
+						.getDistance(space.getLocation(closestMessenger), space.getLocation(customer))) {
+					closestMessenger = messenger;
+				}
 			}
+			return closestMessenger;
 		}
-		return closestMessenger;
+		return null;
 	}
+	
+	public Customer findClosestCustomer(Messenger messenger) {
+		if (!customerList.isEmpty()) {
+			Customer closestCustomer = customerList.get(0);
+			for (Customer customer : customerList) {
+				if (space.getDistance(space.getLocation(customer), space.getLocation(messenger)) < space
+						.getDistance(space.getLocation(closestCustomer), space.getLocation(messenger))) {
+					closestCustomer = customer;
+				}
+			}
+			return closestCustomer;
+		}
+		return null;
+	}
+
+	
 }
