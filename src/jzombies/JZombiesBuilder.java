@@ -30,8 +30,8 @@ public class JZombiesBuilder implements ContextBuilder<Object> {
 	private ArrayList<GridPoint> initialMessengerPositions = new ArrayList<GridPoint>();
 	private ArrayList<GridPoint> customerPositions = new ArrayList<GridPoint>();
 	
-	private ArrayList<Zombie> zombieList = new ArrayList<Zombie>();
-	private ArrayList<Human> humanList = new ArrayList<Human>();
+	private ArrayList<Messenger> messengerList = new ArrayList<Messenger>();
+	private ArrayList<Customer> customerList = new ArrayList<Customer>();
 
 	@Override
 	public Context build(Context<Object> context) {
@@ -49,8 +49,6 @@ public class JZombiesBuilder implements ContextBuilder<Object> {
 		customerPositions.add(new GridPoint(40, 35));
 		customerPositions.add(new GridPoint(10, 35));
 		
-		// replace RandomCartesianAdder with SimpleCartesianAdder
-		// replace WrapAroundBorders with StrictBorders
 		ContinuousSpaceFactory spaceFactory = 
 				ContinuousSpaceFactoryFinder.createContinuousSpaceFactory(null);
 		ContinuousSpace<Object> space = 
@@ -65,33 +63,31 @@ public class JZombiesBuilder implements ContextBuilder<Object> {
 						new SimpleGridAdder<Object>(),
 						true, 50, 50));
 		
-		// add zombie/robot to context and initialize position
 		Parameters params = RunEnvironment.getInstance().getParameters();
 		
-		// add human/carrier to context and initialize position 
-		int humanCount = params.getInteger("human_count");
-		for (int i = 0; i < humanCount; i++) {
-			Human human = new Human(space, grid, i);
-			context.add(human);
-			humanList.add(human);
-			grid.moveTo(human, customerPositions.get(i).getX(), customerPositions.get(i).getY());
-			space.moveTo(human, customerPositions.get(i).getX(), customerPositions.get(i).getY());
+		int customerCount = params.getInteger("human_count");
+		for (int i = 0; i < customerCount; i++) {
+			Customer customer = new Customer(space, grid, i);
+			context.add(customer);
+			customerList.add(customer);
+			grid.moveTo(customer, customerPositions.get(i).getX(), customerPositions.get(i).getY());
+			space.moveTo(customer, customerPositions.get(i).getX(), customerPositions.get(i).getY());
 		}
 
-		int zombieCount = params.getInteger("zombie_count");
-		for (int i = 0; i < zombieCount; i++) {
+		int messengerCount = params.getInteger("zombie_count");
+		for (int i = 0; i < messengerCount; i++) {
 			if (i == 0) {
-				Zombie zombie = new Zombie(space, grid, true, humanList, i);
-				zombieList.add(zombie);
-				context.add(zombie);
-				grid.moveTo(zombie, initialMessengerPositions.get(i).getX(), initialMessengerPositions.get(i).getY());
-				space.moveTo(zombie, initialMessengerPositions.get(i).getX(), initialMessengerPositions.get(i).getY());
+				Messenger messenger = new Messenger(space, grid, true, customerList, i);
+				messengerList.add(messenger);
+				context.add(messenger);
+				grid.moveTo(messenger, initialMessengerPositions.get(i).getX(), initialMessengerPositions.get(i).getY());
+				space.moveTo(messenger, initialMessengerPositions.get(i).getX(), initialMessengerPositions.get(i).getY());
 			} else {
-				Zombie zombie = new Zombie(space, grid, false, humanList, i);
-				zombieList.add(zombie);
-				context.add(zombie);
-				grid.moveTo(zombie, initialMessengerPositions.get(i).getX(), initialMessengerPositions.get(i).getY());
-				space.moveTo(zombie, initialMessengerPositions.get(i).getX(), initialMessengerPositions.get(i).getY());
+				Messenger messenger = new Messenger(space, grid, false, customerList, i);
+				messengerList.add(messenger);
+				context.add(messenger);
+				grid.moveTo(messenger, initialMessengerPositions.get(i).getX(), initialMessengerPositions.get(i).getY());
+				space.moveTo(messenger, initialMessengerPositions.get(i).getX(), initialMessengerPositions.get(i).getY());
 			}
 		}
 				

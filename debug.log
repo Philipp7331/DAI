@@ -1,53 +1,4 @@
-ERROR [AWT-EventQueue-0] 2022-04-27T10:07:01,534 RSApplication - Error while initializing simulation
-java.lang.NullPointerException: null
-	at repast.simphony.engine.controller.WatcherControllerAction.runInitialize(WatcherControllerAction.java:50) ~[?:?]
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:214) ~[?:?]
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:1) ~[?:?]
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:292) ~[?:?]
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:295) ~[?:?]
-	at repast.simphony.util.collections.NaryTree.preOrderTraversal(NaryTree.java:288) ~[?:?]
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:212) ~[?:?]
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:383) ~[?:?]
-	at repast.simphony.ui.RSApplication.initSim(RSApplication.java:157) ~[?:?]
-	at repast.simphony.ui.RSApplication.start(RSApplication.java:189) ~[?:?]
-	at repast.simphony.ui.action.StartRun.actionPerformed(StartRun.java:17) ~[?:?]
-	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:1967) ~[?:?]
-	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2308) ~[?:?]
-	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:405) ~[?:?]
-	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:262) ~[?:?]
-	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:279) ~[?:?]
-	at java.awt.AWTEventMulticaster.mouseReleased(AWTEventMulticaster.java:297) ~[?:?]
-	at java.awt.Component.processMouseEvent(Component.java:6635) ~[?:?]
-	at javax.swing.JComponent.processMouseEvent(JComponent.java:3342) ~[?:?]
-	at java.awt.Component.processEvent(Component.java:6400) ~[?:?]
-	at java.awt.Container.processEvent(Container.java:2263) ~[?:?]
-	at java.awt.Component.dispatchEventImpl(Component.java:5011) ~[?:?]
-	at java.awt.Container.dispatchEventImpl(Container.java:2321) ~[?:?]
-	at java.awt.Component.dispatchEvent(Component.java:4843) ~[?:?]
-	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4918) ~[?:?]
-	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4547) ~[?:?]
-	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4488) ~[?:?]
-	at java.awt.Container.dispatchEventImpl(Container.java:2307) ~[?:?]
-	at java.awt.Window.dispatchEventImpl(Window.java:2772) ~[?:?]
-	at java.awt.Component.dispatchEvent(Component.java:4843) ~[?:?]
-	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:772) ~[?:?]
-	at java.awt.EventQueue$4.run(EventQueue.java:721) ~[?:?]
-	at java.awt.EventQueue$4.run(EventQueue.java:715) ~[?:?]
-	at java.security.AccessController.doPrivileged(Native Method) ~[?:?]
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:85) ~[?:?]
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:95) ~[?:?]
-	at java.awt.EventQueue$5.run(EventQueue.java:745) ~[?:?]
-	at java.awt.EventQueue$5.run(EventQueue.java:743) ~[?:?]
-	at java.security.AccessController.doPrivileged(Native Method) ~[?:?]
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:85) ~[?:?]
-	at java.awt.EventQueue.dispatchEvent(EventQueue.java:742) ~[?:?]
-	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203) ~[?:?]
-	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124) ~[?:?]
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113) ~[?:?]
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109) ~[?:?]
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101) ~[?:?]
-	at java.awt.EventDispatchThread.run(EventDispatchThread.java:90) ~[?:?]
-ERROR [AWT-EventQueue-0] 2022-04-28T09:21:01,196 DisplayComponentControllerAction - Error while creating displays
+ERROR [AWT-EventQueue-0] 2022-05-11T16:42:42,888 DisplayComponentControllerAction - Error while creating displays
 repast.simphony.visualization.engine.DisplayCreationException: Error while creating display.
 	at repast.simphony.visualization.engine.DisplayCreatorOGL2D.createDisplay(DisplayCreatorOGL2D.java:102) ~[?:?]
 	at repast.simphony.visualization.engine.DisplayProducer.createDisplay(DisplayProducer.java:48) ~[?:?]
@@ -98,24 +49,20 @@ repast.simphony.visualization.engine.DisplayCreationException: Error while creat
 	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109) ~[?:?]
 	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101) ~[?:?]
 	at java.awt.EventDispatchThread.run(EventDispatchThread.java:90) ~[?:?]
-Caused by: java.lang.NullPointerException
-	at repast.simphony.visualizationOGL2D.NetworkLayerOGL2D.<init>(NetworkLayerOGL2D.java:34) ~[?:?]
-	at repast.simphony.visualizationOGL2D.DisplayOGL2D.registerNetworkStyle(DisplayOGL2D.java:492) ~[?:?]
-	at repast.simphony.visualization.engine.DisplayCreatorOGL2D$3.register(DisplayCreatorOGL2D.java:89) ~[?:?]
-	at repast.simphony.visualization.engine.DisplayCreatorOGL2D$3.register(DisplayCreatorOGL2D.java:1) ~[?:?]
-	at repast.simphony.visualization.engine.NetworkStyleRegistrar.registerNetworkStyles(NetworkStyleRegistrar.java:44) ~[?:?]
-	at repast.simphony.visualization.engine.DisplayCreatorOGL2D.createDisplay(DisplayCreatorOGL2D.java:87) ~[?:?]
+Caused by: java.lang.ClassNotFoundException: jzombies.Zombie
+	at org.java.plugin.standard.StandardPluginClassLoader.loadClass(Unknown Source) ~[jpf.jar:1.0.0]
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:522) ~[?:?]
+	at java.lang.Class.forName0(Native Method) ~[?:?]
+	at java.lang.Class.forName(Class.java:398) ~[?:?]
+	at repast.simphony.visualization.engine.StyleRegistrar.registerStyles(StyleRegistrar.java:87) ~[?:?]
+	at repast.simphony.visualization.engine.StyleRegistrar.registerStyles(StyleRegistrar.java:34) ~[?:?]
+	at repast.simphony.visualization.engine.DisplayCreatorOGL2D.createDisplay(DisplayCreatorOGL2D.java:79) ~[?:?]
 	... 48 more
-ERROR [AWT-EventQueue-0] 2022-05-08T17:18:46,680 RSApplication - Error while initializing simulation
-java.lang.IndexOutOfBoundsException: Index 4 out of bounds for length 4
-	at jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64) ~[?:?]
-	at jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70) ~[?:?]
-	at jdk.internal.util.Preconditions.checkIndex(Preconditions.java:248) ~[?:?]
-	at java.util.Objects.checkIndex(Objects.java:372) ~[?:?]
-	at java.util.ArrayList.get(ArrayList.java:459) ~[?:?]
-	at jzombies.JZombiesBuilder.build(JZombiesBuilder.java:71) ~[?:?]
-	at repast.simphony.dataLoader.engine.ClassNameContextBuilder.build(ClassNameContextBuilder.java:41) ~[?:?]
-	at repast.simphony.dataLoader.engine.DataLoaderControllerAction.runInitialize(DataLoaderControllerAction.java:48) ~[?:?]
+ERROR [AWT-EventQueue-0] 2022-05-11T16:43:55,286 DisplayComponentControllerAction - Error while creating displays
+repast.simphony.visualization.engine.DisplayCreationException: Error while creating display.
+	at repast.simphony.visualization.engine.DisplayCreatorOGL2D.createDisplay(DisplayCreatorOGL2D.java:102) ~[?:?]
+	at repast.simphony.visualization.engine.DisplayProducer.createDisplay(DisplayProducer.java:48) ~[?:?]
+	at repast.simphony.visualization.engine.DisplayComponentControllerAction.runInitialize(DisplayComponentControllerAction.java:116) ~[?:?]
 	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:214) ~[?:?]
 	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:1) ~[?:?]
 	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:292) ~[?:?]
@@ -162,16 +109,20 @@ java.lang.IndexOutOfBoundsException: Index 4 out of bounds for length 4
 	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109) ~[?:?]
 	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101) ~[?:?]
 	at java.awt.EventDispatchThread.run(EventDispatchThread.java:90) ~[?:?]
-ERROR [AWT-EventQueue-0] 2022-05-08T17:18:54,963 RSApplication - Error while initializing simulation
-java.lang.IndexOutOfBoundsException: Index 12 out of bounds for length 12
-	at jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64) ~[?:?]
-	at jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70) ~[?:?]
-	at jdk.internal.util.Preconditions.checkIndex(Preconditions.java:248) ~[?:?]
-	at java.util.Objects.checkIndex(Objects.java:372) ~[?:?]
-	at java.util.ArrayList.get(ArrayList.java:459) ~[?:?]
-	at jzombies.JZombiesBuilder.build(JZombiesBuilder.java:80) ~[?:?]
-	at repast.simphony.dataLoader.engine.ClassNameContextBuilder.build(ClassNameContextBuilder.java:41) ~[?:?]
-	at repast.simphony.dataLoader.engine.DataLoaderControllerAction.runInitialize(DataLoaderControllerAction.java:48) ~[?:?]
+Caused by: java.lang.ClassNotFoundException: jzombies.Human
+	at org.java.plugin.standard.StandardPluginClassLoader.loadClass(Unknown Source) ~[jpf.jar:1.0.0]
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:522) ~[?:?]
+	at java.lang.Class.forName0(Native Method) ~[?:?]
+	at java.lang.Class.forName(Class.java:398) ~[?:?]
+	at repast.simphony.visualization.engine.StyleRegistrar.registerStyles(StyleRegistrar.java:87) ~[?:?]
+	at repast.simphony.visualization.engine.StyleRegistrar.registerStyles(StyleRegistrar.java:34) ~[?:?]
+	at repast.simphony.visualization.engine.DisplayCreatorOGL2D.createDisplay(DisplayCreatorOGL2D.java:79) ~[?:?]
+	... 48 more
+ERROR [AWT-EventQueue-0] 2022-05-11T16:44:14,982 DisplayComponentControllerAction - Error while creating displays
+repast.simphony.visualization.engine.DisplayCreationException: Error while creating display.
+	at repast.simphony.visualization.engine.DisplayCreatorOGL2D.createDisplay(DisplayCreatorOGL2D.java:102) ~[?:?]
+	at repast.simphony.visualization.engine.DisplayProducer.createDisplay(DisplayProducer.java:48) ~[?:?]
+	at repast.simphony.visualization.engine.DisplayComponentControllerAction.runInitialize(DisplayComponentControllerAction.java:116) ~[?:?]
 	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:214) ~[?:?]
 	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:1) ~[?:?]
 	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:292) ~[?:?]
@@ -218,7 +169,16 @@ java.lang.IndexOutOfBoundsException: Index 12 out of bounds for length 12
 	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109) ~[?:?]
 	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101) ~[?:?]
 	at java.awt.EventDispatchThread.run(EventDispatchThread.java:90) ~[?:?]
-FATAL [Thread-2] 2022-05-11T12:58:15,946 GUIScheduleRunner - RunTimeException when running the schedule
+Caused by: java.lang.ClassNotFoundException: jzombies.Human
+	at org.java.plugin.standard.StandardPluginClassLoader.loadClass(Unknown Source) ~[jpf.jar:1.0.0]
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:522) ~[?:?]
+	at java.lang.Class.forName0(Native Method) ~[?:?]
+	at java.lang.Class.forName(Class.java:398) ~[?:?]
+	at repast.simphony.visualization.engine.StyleRegistrar.registerStyles(StyleRegistrar.java:87) ~[?:?]
+	at repast.simphony.visualization.engine.StyleRegistrar.registerStyles(StyleRegistrar.java:34) ~[?:?]
+	at repast.simphony.visualization.engine.DisplayCreatorOGL2D.createDisplay(DisplayCreatorOGL2D.java:79) ~[?:?]
+	... 48 more
+FATAL [Thread-11] 2022-05-11T16:46:22,422 GUIScheduleRunner - RunTimeException when running the schedule
 Current tick (1.0)
 java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
 	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72) ~[?:?]
@@ -230,531 +190,17 @@ java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
 	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52) ~[?:?]
 	at java.lang.Thread.run(Thread.java:829) ~[?:?]
 Caused by: java.lang.reflect.InvocationTargetException
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-Caused by: java.lang.NullPointerException
-	at jzombies.Zombie.callForProposal(Zombie.java:92) ~[?:?]
-	at jzombies.Zombie.step(Zombie.java:53) ~[?:?]
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-FATAL [Thread-2] 2022-05-11T12:59:13,319 GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (1.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72) ~[?:?]
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:336) ~[?:?]
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231) ~[?:?]
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352) ~[?:?]
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52) ~[?:?]
-	at java.lang.Thread.run(Thread.java:829) ~[?:?]
-Caused by: java.lang.reflect.InvocationTargetException
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-Caused by: java.lang.NullPointerException
-	at jzombies.Zombie.callForProposal(Zombie.java:92) ~[?:?]
-	at jzombies.Zombie.step(Zombie.java:53) ~[?:?]
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-FATAL [Thread-3] 2022-05-11T12:59:30,282 GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (1.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72) ~[?:?]
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:336) ~[?:?]
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231) ~[?:?]
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352) ~[?:?]
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52) ~[?:?]
-	at java.lang.Thread.run(Thread.java:829) ~[?:?]
-Caused by: java.lang.reflect.InvocationTargetException
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-Caused by: java.lang.NullPointerException
-	at jzombies.Zombie.step(Zombie.java:56) ~[?:?]
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-FATAL [Thread-2] 2022-05-11T13:03:44,142 GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (1.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72) ~[?:?]
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:336) ~[?:?]
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231) ~[?:?]
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352) ~[?:?]
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52) ~[?:?]
-	at java.lang.Thread.run(Thread.java:829) ~[?:?]
-Caused by: java.lang.reflect.InvocationTargetException
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-Caused by: java.lang.NullPointerException
-	at jzombies.Zombie.step(Zombie.java:56) ~[?:?]
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-FATAL [Thread-2] 2022-05-11T13:05:10,170 GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (1.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72) ~[?:?]
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:336) ~[?:?]
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231) ~[?:?]
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352) ~[?:?]
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52) ~[?:?]
-	at java.lang.Thread.run(Thread.java:829) ~[?:?]
-Caused by: java.lang.reflect.InvocationTargetException
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-Caused by: java.lang.NullPointerException
-	at jzombies.Zombie.callForProposal(Zombie.java:93) ~[?:?]
-	at jzombies.Zombie.step(Zombie.java:54) ~[?:?]
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-FATAL [Thread-2] 2022-05-11T13:06:38,602 GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (1.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72) ~[?:?]
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:336) ~[?:?]
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231) ~[?:?]
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352) ~[?:?]
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52) ~[?:?]
-	at java.lang.Thread.run(Thread.java:829) ~[?:?]
-Caused by: java.lang.reflect.InvocationTargetException
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-Caused by: java.lang.NullPointerException
-	at jzombies.Zombie.step(Zombie.java:56) ~[?:?]
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-FATAL [Thread-2] 2022-05-11T13:07:56,454 GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (1.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72) ~[?:?]
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:336) ~[?:?]
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231) ~[?:?]
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352) ~[?:?]
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52) ~[?:?]
-	at java.lang.Thread.run(Thread.java:829) ~[?:?]
-Caused by: java.lang.reflect.InvocationTargetException
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-Caused by: java.lang.NullPointerException
-	at jzombies.Zombie.callForProposal(Zombie.java:92) ~[?:?]
-	at jzombies.Zombie.step(Zombie.java:53) ~[?:?]
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-FATAL [Thread-2] 2022-05-11T13:10:29,358 GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (1.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72) ~[?:?]
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:336) ~[?:?]
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231) ~[?:?]
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352) ~[?:?]
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52) ~[?:?]
-	at java.lang.Thread.run(Thread.java:829) ~[?:?]
-Caused by: java.lang.reflect.InvocationTargetException
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-Caused by: java.lang.NullPointerException
-	at jzombies.Zombie.callForProposal(Zombie.java:94) ~[?:?]
-	at jzombies.Zombie.step(Zombie.java:53) ~[?:?]
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-FATAL [Thread-2] 2022-05-11T13:11:21,002 GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (1.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72) ~[?:?]
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:336) ~[?:?]
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231) ~[?:?]
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352) ~[?:?]
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52) ~[?:?]
-	at java.lang.Thread.run(Thread.java:829) ~[?:?]
-Caused by: java.lang.reflect.InvocationTargetException
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-Caused by: java.lang.NullPointerException
-	at jzombies.Zombie.callForProposal(Zombie.java:95) ~[?:?]
-	at jzombies.Zombie.step(Zombie.java:53) ~[?:?]
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-FATAL [Thread-2] 2022-05-11T13:11:59,298 GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (1.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72) ~[?:?]
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:336) ~[?:?]
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231) ~[?:?]
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352) ~[?:?]
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52) ~[?:?]
-	at java.lang.Thread.run(Thread.java:829) ~[?:?]
-Caused by: java.lang.reflect.InvocationTargetException
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-Caused by: java.lang.NullPointerException
-	at jzombies.Zombie.callForProposal(Zombie.java:97) ~[?:?]
-	at jzombies.Zombie.step(Zombie.java:53) ~[?:?]
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-FATAL [Thread-2] 2022-05-11T13:13:45,541 GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (1.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72) ~[?:?]
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:336) ~[?:?]
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231) ~[?:?]
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352) ~[?:?]
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52) ~[?:?]
-	at java.lang.Thread.run(Thread.java:829) ~[?:?]
-Caused by: java.lang.reflect.InvocationTargetException
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-Caused by: java.lang.NullPointerException
-	at jzombies.Zombie.callForProposal(Zombie.java:98) ~[?:?]
-	at jzombies.Zombie.step(Zombie.java:53) ~[?:?]
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-FATAL [Thread-2] 2022-05-11T13:14:24,705 GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (1.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72) ~[?:?]
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:336) ~[?:?]
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231) ~[?:?]
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352) ~[?:?]
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52) ~[?:?]
-	at java.lang.Thread.run(Thread.java:829) ~[?:?]
-Caused by: java.lang.reflect.InvocationTargetException
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-Caused by: java.lang.NullPointerException
-	at jzombies.Zombie.callForProposal(Zombie.java:98) ~[?:?]
-	at jzombies.Zombie.step(Zombie.java:53) ~[?:?]
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-FATAL [Thread-2] 2022-05-11T13:16:48,993 GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (89.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72) ~[?:?]
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:336) ~[?:?]
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231) ~[?:?]
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352) ~[?:?]
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52) ~[?:?]
-	at java.lang.Thread.run(Thread.java:829) ~[?:?]
-Caused by: java.lang.reflect.InvocationTargetException
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-Caused by: java.lang.NullPointerException
-	at jzombies.Zombie.moveTowards(Zombie.java:135) ~[?:?]
-	at jzombies.Zombie.step(Zombie.java:73) ~[?:?]
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-FATAL [Thread-3] 2022-05-11T14:07:14,776 GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (1.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72) ~[?:?]
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:336) ~[?:?]
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231) ~[?:?]
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352) ~[?:?]
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52) ~[?:?]
-	at java.lang.Thread.run(Thread.java:829) ~[?:?]
-Caused by: java.lang.reflect.InvocationTargetException
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
+	at jzombies.Messenger$$FastClassByCGLIB$$23897228.invoke(<generated>) ~[?:?]
 	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
 	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
 	... 7 more
 Caused by: java.lang.NullPointerException
 	at repast.simphony.space.continuous.AbstractContinuousSpace.getDistanceSq(AbstractContinuousSpace.java:418) ~[?:?]
 	at repast.simphony.space.continuous.AbstractContinuousSpace.getDistance(AbstractContinuousSpace.java:404) ~[?:?]
-	at jzombies.Zombie.findClosestZombie(Zombie.java:143) ~[?:?]
-	at jzombies.Zombie.callForProposal(Zombie.java:94) ~[?:?]
-	at jzombies.Zombie.step(Zombie.java:56) ~[?:?]
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-FATAL [Thread-2] 2022-05-11T14:09:33,035 GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (88.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72) ~[?:?]
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:336) ~[?:?]
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231) ~[?:?]
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352) ~[?:?]
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52) ~[?:?]
-	at java.lang.Thread.run(Thread.java:829) ~[?:?]
-Caused by: java.lang.reflect.InvocationTargetException
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-Caused by: java.lang.IndexOutOfBoundsException: Index 1 out of bounds for length 1
-	at jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64) ~[?:?]
-	at jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70) ~[?:?]
-	at jdk.internal.util.Preconditions.checkIndex(Preconditions.java:248) ~[?:?]
-	at java.util.Objects.checkIndex(Objects.java:372) ~[?:?]
-	at java.util.ArrayList.remove(ArrayList.java:536) ~[?:?]
-	at jzombies.Zombie.moveTowards(Zombie.java:127) ~[?:?]
-	at jzombies.Zombie.step(Zombie.java:78) ~[?:?]
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-FATAL [Thread-2] 2022-05-11T14:11:03,168 GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (21.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72) ~[?:?]
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:336) ~[?:?]
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231) ~[?:?]
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352) ~[?:?]
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52) ~[?:?]
-	at java.lang.Thread.run(Thread.java:829) ~[?:?]
-Caused by: java.lang.reflect.InvocationTargetException
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-Caused by: java.lang.IndexOutOfBoundsException: Index 4 out of bounds for length 3
-	at jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64) ~[?:?]
-	at jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70) ~[?:?]
-	at jdk.internal.util.Preconditions.checkIndex(Preconditions.java:248) ~[?:?]
-	at java.util.Objects.checkIndex(Objects.java:372) ~[?:?]
-	at java.util.ArrayList.remove(ArrayList.java:536) ~[?:?]
-	at jzombies.Zombie.moveTowards(Zombie.java:127) ~[?:?]
-	at jzombies.Zombie.step(Zombie.java:78) ~[?:?]
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-FATAL [Thread-2] 2022-05-11T14:15:22,470 GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (20.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72) ~[?:?]
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:336) ~[?:?]
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231) ~[?:?]
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352) ~[?:?]
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52) ~[?:?]
-	at java.lang.Thread.run(Thread.java:829) ~[?:?]
-Caused by: java.lang.reflect.InvocationTargetException
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-Caused by: java.lang.IndexOutOfBoundsException: Index 4 out of bounds for length 3
-	at jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64) ~[?:?]
-	at jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70) ~[?:?]
-	at jdk.internal.util.Preconditions.checkIndex(Preconditions.java:248) ~[?:?]
-	at java.util.Objects.checkIndex(Objects.java:372) ~[?:?]
-	at java.util.ArrayList.remove(ArrayList.java:536) ~[?:?]
-	at jzombies.Zombie.moveTowards(Zombie.java:128) ~[?:?]
-	at jzombies.Zombie.step(Zombie.java:78) ~[?:?]
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-FATAL [Thread-2] 2022-05-11T14:21:08,210 GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (19.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72) ~[?:?]
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:336) ~[?:?]
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231) ~[?:?]
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352) ~[?:?]
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52) ~[?:?]
-	at java.lang.Thread.run(Thread.java:829) ~[?:?]
-Caused by: java.lang.reflect.InvocationTargetException
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-Caused by: java.lang.IndexOutOfBoundsException: Index 4 out of bounds for length 3
-	at jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64) ~[?:?]
-	at jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70) ~[?:?]
-	at jdk.internal.util.Preconditions.checkIndex(Preconditions.java:248) ~[?:?]
-	at java.util.Objects.checkIndex(Objects.java:372) ~[?:?]
-	at java.util.ArrayList.remove(ArrayList.java:536) ~[?:?]
-	at jzombies.Zombie.moveTowards(Zombie.java:129) ~[?:?]
-	at jzombies.Zombie.step(Zombie.java:78) ~[?:?]
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-FATAL [Thread-2] 2022-05-11T14:23:56,985 GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (20.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72) ~[?:?]
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:336) ~[?:?]
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231) ~[?:?]
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352) ~[?:?]
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52) ~[?:?]
-	at java.lang.Thread.run(Thread.java:829) ~[?:?]
-Caused by: java.lang.reflect.InvocationTargetException
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-Caused by: java.lang.IndexOutOfBoundsException: Index 4 out of bounds for length 3
-	at jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64) ~[?:?]
-	at jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70) ~[?:?]
-	at jdk.internal.util.Preconditions.checkIndex(Preconditions.java:248) ~[?:?]
-	at java.util.Objects.checkIndex(Objects.java:372) ~[?:?]
-	at java.util.ArrayList.remove(ArrayList.java:536) ~[?:?]
-	at jzombies.Zombie.moveTowards(Zombie.java:129) ~[?:?]
-	at jzombies.Zombie.step(Zombie.java:78) ~[?:?]
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-FATAL [Thread-3] 2022-05-11T14:28:46,308 GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (1.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72) ~[?:?]
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:336) ~[?:?]
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231) ~[?:?]
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352) ~[?:?]
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52) ~[?:?]
-	at java.lang.Thread.run(Thread.java:829) ~[?:?]
-Caused by: java.lang.reflect.InvocationTargetException
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-Caused by: java.lang.NullPointerException
-	at repast.simphony.space.continuous.AbstractContinuousSpace.getDistanceSq(AbstractContinuousSpace.java:418) ~[?:?]
-	at repast.simphony.space.continuous.AbstractContinuousSpace.getDistance(AbstractContinuousSpace.java:404) ~[?:?]
-	at jzombies.Zombie.findClosestZombie(Zombie.java:145) ~[?:?]
-	at jzombies.Zombie.callForProposal(Zombie.java:95) ~[?:?]
-	at jzombies.Zombie.step(Zombie.java:56) ~[?:?]
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-FATAL [Thread-4] 2022-05-11T14:28:49,723 GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (1.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72) ~[?:?]
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:336) ~[?:?]
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231) ~[?:?]
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352) ~[?:?]
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52) ~[?:?]
-	at java.lang.Thread.run(Thread.java:829) ~[?:?]
-Caused by: java.lang.reflect.InvocationTargetException
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-Caused by: java.lang.NullPointerException
-	at repast.simphony.space.continuous.AbstractContinuousSpace.getDistanceSq(AbstractContinuousSpace.java:418) ~[?:?]
-	at repast.simphony.space.continuous.AbstractContinuousSpace.getDistance(AbstractContinuousSpace.java:404) ~[?:?]
-	at jzombies.Zombie.findClosestZombie(Zombie.java:145) ~[?:?]
-	at jzombies.Zombie.callForProposal(Zombie.java:95) ~[?:?]
-	at jzombies.Zombie.step(Zombie.java:56) ~[?:?]
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-FATAL [Thread-5] 2022-05-11T14:28:54,854 GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (1.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72) ~[?:?]
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:336) ~[?:?]
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205) ~[?:?]
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231) ~[?:?]
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352) ~[?:?]
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52) ~[?:?]
-	at java.lang.Thread.run(Thread.java:829) ~[?:?]
-Caused by: java.lang.reflect.InvocationTargetException
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
-	... 7 more
-Caused by: java.lang.NullPointerException
-	at repast.simphony.space.continuous.AbstractContinuousSpace.getDistanceSq(AbstractContinuousSpace.java:418) ~[?:?]
-	at repast.simphony.space.continuous.AbstractContinuousSpace.getDistance(AbstractContinuousSpace.java:404) ~[?:?]
-	at jzombies.Zombie.findClosestZombie(Zombie.java:145) ~[?:?]
-	at jzombies.Zombie.callForProposal(Zombie.java:95) ~[?:?]
-	at jzombies.Zombie.step(Zombie.java:56) ~[?:?]
-	at jzombies.Zombie$$FastClassByCGLIB$$6141f31.invoke(<generated>) ~[?:?]
+	at jzombies.Messenger.findClosestZombie(Messenger.java:155) ~[?:?]
+	at jzombies.Messenger.callForProposal(Messenger.java:103) ~[?:?]
+	at jzombies.Messenger.step(Messenger.java:55) ~[?:?]
+	at jzombies.Messenger$$FastClassByCGLIB$$23897228.invoke(<generated>) ~[?:?]
 	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53) ~[?:?]
 	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69) ~[?:?]
 	... 7 more

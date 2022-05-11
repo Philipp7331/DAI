@@ -3,21 +3,21 @@
   <type>2D</type>
   <styles>
     <entry>
-      <string>jzombies.Zombie</string>
+      <string>jzombies.Messenger</string>
       <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
     </entry>
     <entry>
-      <string>jzombies.Human</string>
+      <string>jzombies.Customer</string>
       <string>repast.simphony.visualizationOGL2D.DefaultStyleOGL2D</string>
     </entry>
   </styles>
   <editedStyles>
     <entry>
-      <string>jzombies.Zombie</string>
-      <string>jzombies.Zombie.style_4.xml</string>
+      <string>jzombies.Messenger</string>
+      <string>jzombies.Messenger.style_3.xml</string>
     </entry>
     <entry>
-      <string>jzombies.Human</string>
+      <string>jzombies.Customer</string>
       <null/>
     </entry>
   </editedStyles>
@@ -31,18 +31,18 @@
     <pType>LAST</pType>
     <duration>-1.0</duration>
     <frequency>REPEAT</frequency>
-    <hashCode>-1368499135</hashCode>
+    <hashCode>-1517166006</hashCode>
   </schedParams>
   <layoutClassName>foo.bar.baz</layoutClassName>
   <layoutProjection>space</layoutProjection>
   <layoutInterval>0</layoutInterval>
   <layerOrder>
     <entry>
-      <string>jzombies.Zombie</string>
+      <string>jzombies.Messenger</string>
       <int>1</int>
     </entry>
     <entry>
-      <string>jzombies.Human</string>
+      <string>jzombies.Customer</string>
       <int>0</int>
     </entry>
   </layerOrder>
