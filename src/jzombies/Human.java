@@ -29,15 +29,19 @@ public class Human {
 	private Grid<Object> grid;
 	// save goals in an arraylist
 	private ArrayList<GridPoint> goals = new ArrayList<GridPoint>();
+	private static int idCounter = 0;
+	private int id;
 	
-	public Human(ContinuousSpace<Object> space, Grid<Object> grid) {
+	public Human(ContinuousSpace<Object> space, Grid<Object> grid, int id) {
 		this.space = space;
 		this.grid = grid;
+		this.id = id;
 	}
 	
 	// add a ScheduledMethod to the run method of the human instead of the watcher
-	@ScheduledMethod(start = 1, interval = 1)
+	//@ScheduledMethod(start = 1, interval = 1)
 	public void run() {
+		/*
 		// if we have goals left we move towards them and remove if reached
 		if (!goals.isEmpty()) {
 			moveTowards(goals.get(0));
@@ -47,8 +51,13 @@ public class Human {
 		} else {
 			System.out.println("DONE");
 		}
+		*/
 	}
 	
+	public int getId() {
+		return this.id;
+	}
+ 	
 	public void moveTowards(GridPoint pt) {
 		// only move if we are not already in this grid location
 		if (!pt.equals(grid.getLocation(this))) {

@@ -31,6 +31,7 @@ public class JZombiesBuilder implements ContextBuilder<Object> {
 	private ArrayList<GridPoint> customerPositions = new ArrayList<GridPoint>();
 	
 	private ArrayList<Zombie> zombieList = new ArrayList<Zombie>();
+	private ArrayList<Human> humanList = new ArrayList<Human>();
 
 	@Override
 	public Context build(Context<Object> context) {
@@ -66,32 +67,34 @@ public class JZombiesBuilder implements ContextBuilder<Object> {
 		
 		// add zombie/robot to context and initialize position
 		Parameters params = RunEnvironment.getInstance().getParameters();
+		
+		// add human/carrier to context and initialize position 
+		int humanCount = params.getInteger("human_count");
+		for (int i = 0; i < humanCount; i++) {
+			Human human = new Human(space, grid, i);
+			context.add(human);
+			humanList.add(human);
+			grid.moveTo(human, customerPositions.get(i).getX(), customerPositions.get(i).getY());
+			space.moveTo(human, customerPositions.get(i).getX(), customerPositions.get(i).getY());
+		}
+
 		int zombieCount = params.getInteger("zombie_count");
 		for (int i = 0; i < zombieCount; i++) {
 			if (i == 0) {
-				Zombie zombie = new Zombie(space, grid, true);
+				Zombie zombie = new Zombie(space, grid, true, humanList, i);
 				zombieList.add(zombie);
 				context.add(zombie);
 				grid.moveTo(zombie, initialMessengerPositions.get(i).getX(), initialMessengerPositions.get(i).getY());
 				space.moveTo(zombie, initialMessengerPositions.get(i).getX(), initialMessengerPositions.get(i).getY());
 			} else {
-				Zombie zombie = new Zombie(space, grid, false);
+				Zombie zombie = new Zombie(space, grid, false, humanList, i);
 				zombieList.add(zombie);
 				context.add(zombie);
 				grid.moveTo(zombie, initialMessengerPositions.get(i).getX(), initialMessengerPositions.get(i).getY());
 				space.moveTo(zombie, initialMessengerPositions.get(i).getX(), initialMessengerPositions.get(i).getY());
 			}
 		}
-		
-		// add human/carrier to context and initialize position 
-		int humanCount = params.getInteger("human_count");
-		for (int i = 0; i < humanCount; i++) {
-			Human human = new Human(space, grid);
-			context.add(human);
-			grid.moveTo(human, customerPositions.get(i).getX(), customerPositions.get(i).getY());
-			space.moveTo(human, customerPositions.get(i).getX(), customerPositions.get(i).getY());
-		}
-		
+				
 		return context;
 	}
 

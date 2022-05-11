@@ -25,67 +25,105 @@ import repast.simphony.util.SimUtilities;
  *
  */
 public class Zombie {
-	
+
 	private ContinuousSpace<Object> space;
 	private Grid<Object> grid;
 	public boolean initiator;
 	public GridPoint nextGoal;
-	public static ArrayList<Zombie> zombieList;
+	public static ArrayList<Zombie> zombieList = new ArrayList<Zombie>();
 	public static ArrayList<Human> humanList;
-	public static MessageCenter mc;
-	private static int idCounter = 0;
+	public static MessageCenter mc = new MessageCenter();
 	private int id;
-	
-	public Zombie(ContinuousSpace<Object> space, Grid<Object> grid, boolean initiator, 
-			ArrayList<Human> humanList, MessageCenter mc) {
+	private Human nextCustomer;
+
+	public Zombie(ContinuousSpace<Object> space, Grid<Object> grid, boolean initiator, ArrayList<Human> humanList,
+			int id) {
 		this.space = space;
 		this.grid = grid;
 		this.initiator = initiator;
 		Zombie.zombieList.add(this);
 		Zombie.humanList = humanList;
-		this.id = Zombie.idCounter++;
+		this.id = id;
 		this.nextGoal = null;
+		this.nextCustomer = null;
 	}
-	
+
 	@ScheduledMethod(start = 1, interval = 1)
 	public void step() {
-		// we reuse the zombie logic to make the "robot" follow the mail carrier
-		// get the grid location of this Zombie
+		// if this is the initiator and nobody has a goal left: CFP for all customers
 		if (this.initiator) {
-			// call for proposal
-			// distribute tasks
-			if (nextGoalAllNull(zombieList)) {
-				for (Zombie zombie : zombieList) {
-					mc.addMessage(new FIPA_Message(this.id, zombie.id, FIPA_Performative.CFP, "cfp"));
+			callForProposal();
+		}
+
+		while (mc.messagesAvailable(this.id)) {
+			FIPA_Message msg = mc.getMessage(this.id);
+
+			// if we get a CFP we propose for all customers
+			if (msg.getPerformative().equals(FIPA_Performative.CFP.toString())) {
+				mc.addMessage(new FIPA_Message(this.id, msg.getSender(), FIPA_Performative.PROPOSE,
+						grid.getLocation(this).toString()));
+			}
+			
+			// if initiator accepts the proposal set the goal and remove customer
+			else if (msg.getPerformative().equals(FIPA_Performative.ACCEPT_PROPOSAL.toString())) {
+				this.nextGoal = grid.getLocation(getHumanById(Integer.parseInt(msg.getContent())));
+				this.nextCustomer = getHumanById(Integer.parseInt(msg.getContent()));
+			}
+
+		}
+
+		// TODO move towards goal if reached inform-done
+		if (nextGoal != null) {
+			moveTowards(nextGoal, nextCustomer); // nextGoal = null;
+		}
+		
+		System.out.println("start of tick");
+		for(Zombie zombie: zombieList) {
+			System.out.println(zombie.nextGoal);
+			System.out.println(zombie.id);
+		}
+		System.out.println("end of tick");
+		
+		System.out.println(" ");
+
+	}
+
+	public void callForProposal() {
+		// CFP if nobody has a goal left
+		if (nextGoalAllNull(zombieList)) {
+			for (Zombie zombie : zombieList) {
+				mc.addMessage(new FIPA_Message(this.id, zombie.id, FIPA_Performative.CFP,
+						"send me the coordinates of your current location"));
+			}
+		}
+
+		// System.out.println(humanList.size());
+		// accept proposal of messenger closest to the customer
+		for (Human human : humanList) {
+			Zombie closestZombie = findClosestZombie(human);
+			// System.out.println(" ID: " + human.getId());
+			mc.addMessage(new FIPA_Message(this.id, closestZombie.id, FIPA_Performative.ACCEPT_PROPOSAL,
+					String.valueOf(human.getId())));
+
+			for (Zombie zombie : zombieList) {
+				if (zombie != closestZombie) {
+					mc.addMessage(new FIPA_Message(this.id, zombie.id, FIPA_Performative.REJECT_PROPOSAL,
+							String.valueOf(human.getId())));
 				}
 			}
-			// TODO either only the closest agent proposes or all propose with their distance to goal
 		}
-		
-		for (FIPA_Message msg : mc.messageList) {
-			if (msg.getPerformative() == FIPA_Performative.CFP.toString()) {
-				// TODO check if agent is closest to goal --> positive proposal else refuse
-			}
-		}
-		
-		// TODO move towards goal
-		/*
-		if (nextGoal != null) {
-			moveTowards(nextGoal);
-			//nextGoal = null;
-		}
-		*/
-		
+
 	}
-	
+
 	public boolean nextGoalAllNull(ArrayList<Zombie> zombieList) {
 		for (Zombie zombie : zombieList) {
-			if (zombie.nextGoal != null) return false;
+			if (zombie.nextGoal != null)
+				return false;
 		}
 		return true;
 	}
-	
-	public void moveTowards(GridPoint pt) {
+
+	public void moveTowards(GridPoint pt, Human customer) {
 		// only move if we are not already in this grid location
 		if (!pt.equals(grid.getLocation(this))) {
 			NdPoint myPoint = space.getLocation(this);
@@ -93,29 +131,32 @@ public class Zombie {
 			double angle = SpatialMath.calcAngleFor2DMovement(space, myPoint, otherPoint);
 			space.moveByVector(this, 1, angle, 0);
 			myPoint = space.getLocation(this);
-			grid.moveTo(this, (int)myPoint.getX(), (int)myPoint.getY());
+			grid.moveTo(this, (int) Math.round(myPoint.getX()), (int) Math.round(myPoint.getY()));
+		} else {
+			mc.addMessage(new FIPA_Message(this.id, zombieList.get(0).id, FIPA_Performative.INFORM_DONE, "Finished"));
+			if (!humanList.isEmpty()) {
+				humanList.remove(customer);
+			}
+			this.nextGoal = null;
 		}
 	}
-}
 
-/*
-GridPoint pt = grid.getLocation(this);
+	public Human getHumanById(int id) {
+		for (Human human : humanList) {
+			if (human.getId() == id)
+				return human;
+		}
+		return null;
+	}
 
-// use the GridCellNgh class to create GridCells for surrounding neighborhood
-// extend the search radius to the size of the grid
-GridCellNgh<Human> nghCreator = new GridCellNgh<Human>(grid, pt, Human.class, 50, 50);
-List<GridCell<Human>> gridCells = nghCreator.getNeighborhood(true);
-SimUtilities.shuffle(gridCells, RandomHelper.getUniform());
-
-// we don't change this logic because it works perfectly fine for one carrier and one robot
-GridPoint pointWithMostHumans = null;
-int maxCount = -1;
-for (GridCell<Human> cell : gridCells) {
-	if (cell.size() > maxCount) {
-		pointWithMostHumans = cell.getPoint();
-		maxCount = cell.size();
+	public Zombie findClosestZombie(Human human) {
+		Zombie closestZombie = zombieList.get(0);
+		for (Zombie zombie : zombieList) {
+			if (space.getDistance(space.getLocation(zombie), space.getLocation(human)) < space
+					.getDistance(space.getLocation(closestZombie), space.getLocation(human))) {
+				closestZombie = zombie;
+			}
+		}
+		return closestZombie;
 	}
 }
-moveTowards(pointWithMostHumans);
-*/
-
