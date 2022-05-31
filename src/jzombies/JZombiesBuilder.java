@@ -1,5 +1,7 @@
 package jzombies;
 
+import java.util.ArrayList;
+
 import repast.simphony.context.Context;
 import repast.simphony.context.space.continuous.ContinuousSpaceFactory;
 import repast.simphony.context.space.continuous.ContinuousSpaceFactoryFinder;
@@ -16,7 +18,6 @@ import repast.simphony.space.continuous.RandomCartesianAdder;
 import repast.simphony.space.grid.Grid;
 import repast.simphony.space.grid.GridBuilderParameters;
 import repast.simphony.space.grid.SimpleGridAdder;
-import repast.simphony.space.grid.WrapAroundBorders;
 
 public class JZombiesBuilder implements ContextBuilder<Object> {
 
@@ -32,12 +33,12 @@ public class JZombiesBuilder implements ContextBuilder<Object> {
 		ContinuousSpace<Object> space = 
 				spaceFactory.createContinuousSpace("space", context, 
 						new RandomCartesianAdder<Object>(),
-						new repast.simphony.space.continuous.WrapAroundBorders(),
+						new repast.simphony.space.continuous.StrictBorders(),
 						50, 50);
 		
 		GridFactory gridFactory = GridFactoryFinder.createGridFactory(null);
 		Grid<Object> grid = gridFactory.createGrid("grid", context, 
-				new GridBuilderParameters<Object>(new WrapAroundBorders(),
+				new GridBuilderParameters<Object>(new repast.simphony.space.grid.StrictBorders(),
 						new SimpleGridAdder<Object>(),
 						true, 50, 50));
 		
@@ -48,12 +49,18 @@ public class JZombiesBuilder implements ContextBuilder<Object> {
 			
 		}
 		
+		int materialCount = params.getInteger("material_count");
+		for (int i = 0; i < materialCount; i++) {
+			Material material = new Material(space, grid);
+			context.add(material);
+		}
+		
 		int humanCount = params.getInteger("human_count");
 		for (int i = 0; i < humanCount; i++) {
 			int energy = RandomHelper.nextIntFromTo(4, 10);
 			context.add(new Human(space, grid, energy));
 		}
-		
+				
 		for (Object obj : context) {
 			NdPoint pt = space.getLocation(obj);
 			grid.moveTo(obj, (int)pt.getX(), (int)pt.getY());

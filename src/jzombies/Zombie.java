@@ -11,6 +11,7 @@ import repast.simphony.engine.schedule.ScheduledMethod;
 import repast.simphony.query.space.grid.GridCell;
 import repast.simphony.query.space.grid.GridCellNgh;
 import repast.simphony.random.RandomHelper;
+import repast.simphony.space.SpatialException;
 import repast.simphony.space.SpatialMath;
 import repast.simphony.space.continuous.ContinuousSpace;
 import repast.simphony.space.continuous.NdPoint;
@@ -58,16 +59,21 @@ public class Zombie {
 	}
 	
 	public void moveTowards(GridPoint pt) {
-		// only move if we are not already in this grid location
-		if (!pt.equals(grid.getLocation(this))) {
-			NdPoint myPoint = space.getLocation(this);
-			NdPoint otherPoint = new NdPoint(pt.getX(), pt.getY());
-			double angle = SpatialMath.calcAngleFor2DMovement(space, myPoint, otherPoint);
-			space.moveByVector(this, 1, angle, 0);
-			myPoint = space.getLocation(this);
-			grid.moveTo(this, (int)myPoint.getX(), (int)myPoint.getY());
-			
-			moved = true;
+		try {
+			// only move if we are not already in this grid location
+			if (!pt.equals(grid.getLocation(this))) {
+				NdPoint myPoint = space.getLocation(this);
+				NdPoint otherPoint = new NdPoint(pt.getX(), pt.getY());
+				double angle = SpatialMath.calcAngleFor2DMovement(space, myPoint, otherPoint);
+				space.moveByVector(this, 1, angle, 0);
+				myPoint = space.getLocation(this);
+				grid.moveTo(this, (int)myPoint.getX(), (int)myPoint.getY());
+				
+				moved = true;
+			}
+
+		} catch (SpatialException e) {
+			return;
 		}
 	}
 	
