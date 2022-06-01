@@ -1,0 +1,2 @@
+"tick","Human Count","Zombie Count"
+1.0,1,3

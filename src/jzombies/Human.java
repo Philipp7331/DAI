@@ -31,6 +31,7 @@ public class Human {
 	private Grid<Object> grid;
 	private int energy, startingEnergy;
 	private int carriedMaterial;
+	public static ArrayList<Trap> traps = new ArrayList<Trap>();
 	
 	public Human(ContinuousSpace<Object> space, Grid<Object> grid, int energy) {
 		this.space = space;
@@ -93,7 +94,9 @@ public class Human {
 			carriedMaterial++;
 			context.remove(closestMaterial);
 		} else if (pointWithMaterial == null) {
-			// move random direction
+			int x = RandomHelper.nextIntFromTo(0,49);
+			int y = RandomHelper.nextIntFromTo(0,49);
+			moveTowards(new GridPoint(x,y));
 		} else {
 			energy = startingEnergy;
 		}	
@@ -105,6 +108,7 @@ public class Human {
 		Trap trap = new Trap(space, grid);
 		carriedMaterial = 0;
 		context.add(trap);
+		traps.add(trap);
 		grid.moveTo(trap, pt.getX(), pt.getY());
 	}
 	

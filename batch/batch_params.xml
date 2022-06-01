@@ -1,3 +1,1 @@
-<?xml version="1.0"?>
-<sweep runs="1">
-</sweep>
+<?xml version="1.0" ?><sweep runs="1"><parameter name="human_count" type="constant" constant_type="int" value="200"></parameter><parameter name="zombie_count" type="constant" constant_type="int" value="5"></parameter></sweep>
