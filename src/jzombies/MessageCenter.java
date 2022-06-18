@@ -45,7 +45,7 @@ public class MessageCenter {
 		return null;
 	}
 	
-	public void send(int sender, int receiver, FIPA_Performative performative, String content){
-		this.addMessage( new FIPA_Message(sender, receiver, performative, content) );
+	public void send(int sender, int receiver, int subject, FIPA_Performative performative, String content){
+		this.addMessage( new FIPA_Message(sender, receiver, subject, performative, content) );
 	}
 }
