@@ -5,6 +5,7 @@ package jzombies;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import repast.simphony.context.Context;
 import repast.simphony.engine.schedule.ScheduledMethod;
@@ -55,7 +56,7 @@ public class Messenger {
 
 	@ScheduledMethod(start = 1, interval = 1)
 	public void step() {
-		System.out.println(nextGoal);
+		System.out.println("Next Goal of: " + this.id + " " + nextGoal);
 		
 		// check messages for CFP or ACCEPT_PROPOSAL
 		ArrayList<Customer> potentialNextGoals = new ArrayList<>();
@@ -71,15 +72,16 @@ public class Messenger {
 						msg.getSubject(),
 						FIPA_Performative.PROPOSE,
 						String.valueOf(distanceToCustomer));
-				System.out.println("I PROPOSED!");
+				System.out.println(this.id + " PROPOSED!");
 			}
 			
 			// if initiator accepts one or more proposals set the goal for closest one
 			else if (msg.getPerformative().equals(FIPA_Performative.ACCEPT_PROPOSAL.toString())) {
 				potentialNextGoals.add(getCustomerById(msg.getSubject()));
-				if (this.id == 1) {
-					System.out.println("Goals of 1: " + potentialNextGoals.size());
-				}
+				//if (this.id == 1) {
+					//System.out.println("Goals of 1: " + potentialNextGoals.size());
+				//}
+				System.out.println(this.id + " got a job!");
 			}
 		}
 		
@@ -125,12 +127,14 @@ public class Messenger {
 		} else {
 			// either inform-done or failure
 			System.out.println("AT GOAL");
-			if (Math.random() < this.deliveryProbability) {
+			Random generator = new Random(1337); 
+			double random = generator.nextDouble();
+			if (random < this.deliveryProbability) {
 				mc.send(this.id, 1337, nextCustomer.getId(), FIPA_Performative.INFORM_DONE, "");
 			} else {
 				mc.send(this.id, 1337, nextCustomer.getId(), FIPA_Performative.FAILURE, "");
 			}
-			if (!customerList.isEmpty()) customerList.remove(customer);
+			//if (!customerList.isEmpty()) customerList.remove(customer);
 			
 			this.nextGoal = null;
 			this.nextCustomer = null;
@@ -141,35 +145,6 @@ public class Messenger {
 		for (Customer customer : customerList) {
 			if (customer.getId() == id)
 				return customer;
-		}
-		return null;
-	}
-
-	// returns the closest messenger using the getDistance method from current space
-	public Messenger findClosestMessenger(Customer customer) {
-		if (customer != null) {
-			Messenger closestMessenger = messengerList.get(0);
-			for (Messenger messenger : messengerList) {
-				if (space.getDistance(space.getLocation(messenger), space.getLocation(customer)) < space
-						.getDistance(space.getLocation(closestMessenger), space.getLocation(customer))) {
-					closestMessenger = messenger;
-				}
-			}
-			return closestMessenger;
-		}
-		return null;
-	}
-	
-	public Customer findClosestCustomer(Messenger messenger) {
-		if (!customerList.isEmpty()) {
-			Customer closestCustomer = customerList.get(0);
-			for (Customer customer : customerList) {
-				if (space.getDistance(space.getLocation(customer), space.getLocation(messenger)) < space
-						.getDistance(space.getLocation(closestCustomer), space.getLocation(messenger))) {
-					closestCustomer = customer;
-				}
-			}
-			return closestCustomer;
 		}
 		return null;
 	}

@@ -20,6 +20,12 @@ public class MessageCenter {
 		this.messageList = new ArrayList<FIPA_Message>();
 	}
 	
+	public void messageListToString() {
+		for (FIPA_Message msg : messageList) {
+			System.out.println(msg.toString());
+		}
+	}
+	
 	public void addMessage(FIPA_Message message){
 		this.messageList.add(message);
 	}
