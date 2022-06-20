@@ -38,6 +38,7 @@ public class Messenger {
 	public Double succesfulDeliveries;
 	public Double unsuccesfulDeliveries;
 	public Double deliveryProbability;
+	public static int ongoingJobs = 0;
 
 	public Messenger(ContinuousSpace<Object> space, Grid<Object> grid, ArrayList<Customer> customerList, 
 			int id, MessageCenter mc, Double deliveryProbability) {
@@ -88,14 +89,18 @@ public class Messenger {
 		if (nextGoal == null && nextCustomer == null 
 				&& potentialNextGoals != null) {
 			if (potentialNextGoals.size() == 1) {
+				System.out.println(this.id + "I GOT A CLEAR JOB!");
 				this.nextGoal = grid.getLocation(potentialNextGoals.get(0));
 				this.nextCustomer = potentialNextGoals.get(0);
 				potentialNextGoals = null;
-			} else {
+				ongoingJobs++;
+			} else if (potentialNextGoals.size() > 1){
+				System.out.println(this.id + "I GOT MULTIPLE JOBS!");
 				Customer closestCustomer = getClosestCustomer(potentialNextGoals);
 				this.nextGoal = grid.getLocation(closestCustomer);
 				this.nextCustomer = closestCustomer;
 				potentialNextGoals = null;
+				ongoingJobs++;
 			}
 		}
 						
@@ -135,7 +140,6 @@ public class Messenger {
 				mc.send(this.id, 1337, nextCustomer.getId(), FIPA_Performative.FAILURE, "");
 			}
 			//if (!customerList.isEmpty()) customerList.remove(customer);
-			
 			this.nextGoal = null;
 			this.nextCustomer = null;
 		}

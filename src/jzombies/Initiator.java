@@ -56,13 +56,13 @@ public class Initiator {
 		System.out.println("MESSAGE LIST: ");
 		mc.messageListToString();
 
-						
-		if (nextGoalAllNull() && !cfpSent && !customerList.isEmpty()) {
+		if (Messenger.ongoingJobs == 0 && !cfpSent) {			
+		//if (nextGoalAllNull() && !cfpSent && !customerList.isEmpty()) {
 			cfpSent = true;
 			System.out.println("-------------------------SENT CFP--------------------------");
 			// send CFP if goals all null
-			System.out.println("ml size: " + messengerList.size());
-			System.out.println("cl size: " + customerList.size());
+			//System.out.println("ml size: " + messengerList.size());
+			//System.out.println("cl size: " + customerList.size());
 			for (Messenger messenger : messengerList) {
 				for (Customer customer : customerList) {
 					if (!customerDelivered.get(customer.getId())) {
@@ -83,13 +83,6 @@ public class Initiator {
 		// accept proposal of closest messenger
 		ArrayList<ArrayList<FIPA_Message>> allProposals = getAllProposals();
 		int i = 0;
-		/*
-		int numberOfProposals = 0;
-		for (ArrayList<FIPA_Message> customerProposals : allProposals) {
-			numberOfProposals += customerProposals.size();
-		}
-		System.out.println("Number of proposals: " + numberOfProposals);
-		*/
 		System.out.println("SIZE allProposals: " + allProposals.size());
 		for (ArrayList<FIPA_Message> customerProposals : allProposals) {
 			//System.out.println("SIZE customerProposals: " + customerProposals.size());
@@ -115,18 +108,22 @@ public class Initiator {
 			if (msg.getReceiver() == this.id) {
 				Messenger sender = messengerList.get(msg.getSender());
 				if (msg.getPerformative().equals(FIPA_Performative.INFORM_DONE.toString())) {
+					Messenger.ongoingJobs--;
 					jobsFinished++;
 					sender.succesfulDeliveries++;
 					customerDelivered.set(msg.getSubject(), true);
 					//customerList.remove(getCustomerById(msg.getSubject()));
 					removeList.add(msg);
+					System.out.println("BOOLEAN LIST DELIVERED: " + customerDelivered.toString());
 				}
 				if (msg.getPerformative().equals(FIPA_Performative.FAILURE.toString())) {
+					Messenger.ongoingJobs--;
 					jobsFinished++;
 					sender.unsuccesfulDeliveries++;
 					customerDelivered.set(msg.getSubject(), true);
 					//customerList.remove(getCustomerById(msg.getSubject()));
 					removeList.add(msg);
+					System.out.println("BOOLEAN LIST DELIVERED: " + customerDelivered.toString());
 				}
 			}
 		}
@@ -154,7 +151,7 @@ public class Initiator {
 				if (msg.getPerformative().equals(FIPA_Performative.PROPOSE.toString()) 
 						&& msg.getReceiver() == this.id && msg.getSubject() == i) {
 					customerProposals.add(msg);
-					System.out.println("GOT PROPOSAL!");
+					System.out.println("PROPOSE: " + msg.toString());
 				}
 			}
 			allProposals.add(customerProposals);
@@ -164,6 +161,7 @@ public class Initiator {
 		}
 		return allProposals;
 	}
+	
 	
 	public FIPA_Message findCheapestProposal(ArrayList<FIPA_Message> customerProposals) {
 		FIPA_Message cheapestProposal = new FIPA_Message(999, 999, 999, FIPA_Performative.PROPOSE, String.valueOf(Integer.MAX_VALUE));
@@ -175,19 +173,20 @@ public class Initiator {
 			} else {
 				trustAdjustedPrice = Double.parseDouble(msg.getContent()) * (1 - getTrustFactor(messengerList.get(msg.getSender())));
 			}
-			System.out.println("Trust adjusted price: " + trustAdjustedPrice);
+			//System.out.println("Trust adjusted price: " + trustAdjustedPrice);
 			//TODO 2nd round doesn't start with trustAdjustedPrice (only with normal price)
 			//trustAdjustedPrice = Double.parseDouble(msg.getContent());
 			//
-			System.out.println("PROPOSED PRICE: " + trustAdjustedPrice);
+			//System.out.println("PROPOSED PRICE: " + trustAdjustedPrice);
 			if (trustAdjustedPrice < Double.parseDouble(cheapestProposal.getContent())) {
 				cheapestProposal = msg;
 			}
 		}
-		System.out.println("---------------- cheapestProposal: ---------------------");
-		System.out.println(cheapestProposal.toString());
+		//System.out.println("---------------- cheapestProposal: ---------------------");
+		//System.out.println(cheapestProposal.toString());
 		return cheapestProposal;
 	}
+	
 	
 	public Double getTrustFactor(Messenger messenger) {
 		if (messenger.succesfulDeliveries != 0 || messenger.unsuccesfulDeliveries != 0) {
