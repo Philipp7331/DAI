@@ -57,12 +57,12 @@ public class Initiator {
 	@ScheduledMethod(start = 1, interval = 1)
 	public void step() {
 		
+		// if all customers received a delivery reset messengers (and simulate more days)
 		if (!customerDelivered.contains(false)) {
 			simulatedDays++;
 			System.out.println("Day " + simulatedDays + " finished!");
 			if (simulatedDays == daysToSimulate) {
-				//System.exit(0);
-				simCompleted();
+				System.exit(0);
 			}
 			for (Messenger messenger : messengerList) {
 				messenger.resetPosition();
@@ -70,7 +70,6 @@ public class Initiator {
 			for (int i = 0; i < customerDelivered.size(); i++) {
 				customerDelivered.set(i, false);
 			}
-			System.out.println(customerDelivered.toString());
 		}
 
 		if (Messenger.ongoingJobs == 0 && !cfpSent) {			
@@ -92,7 +91,7 @@ public class Initiator {
 			cfpSent = false;
 		}
 		
-		// accept proposal of closest messenger
+		// accept proposal of closest messenger (reject others)
 		ArrayList<ArrayList<FIPA_Message>> allProposals = getAllProposals();
 		int i = 0;
 		for (ArrayList<FIPA_Message> customerProposals : allProposals) {
@@ -144,6 +143,7 @@ public class Initiator {
 		return true;
 	}
 	
+	// gets all proposals from the message center
 	public ArrayList<ArrayList<FIPA_Message>> getAllProposals() {
 		ArrayList<ArrayList<FIPA_Message>> allProposals = new ArrayList<>();
 		for (int i = 0; i < customerList.size(); i++) {
@@ -196,9 +196,4 @@ public class Initiator {
 		return null;
 	}
 	
-	public void simCompleted() {
-		System.out.println("Simulation completed!");
-	}
-	
-
 }
