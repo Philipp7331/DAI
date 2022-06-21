@@ -5,7 +5,7 @@ package jzombies;
 
 
 /**
- * @author Philipp
+ * @author Philipp Flügger 1361053, Patrick Mertes 1368734, Nhat Tran 1373869
  *
  */
 

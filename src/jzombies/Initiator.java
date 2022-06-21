@@ -22,7 +22,10 @@ import zmq.Msg;
 
 /**
  * @author Philipp Flügger 1361053, Patrick Mertes 1368734, Nhat Tran 1373869
- *
+ * A change in the order allocation is already recognizable at the second day. This is the case because
+ * our trust factor implementation heavily punishes logistic companies that fail a delivery on the first 
+ * day. Thus the order allocation changes quickly and even long distances get discounted heavily by a good
+ * trust factor. This even outbids much shorter distances if their trust factor is very low.
  */
 public class Initiator {
 	
