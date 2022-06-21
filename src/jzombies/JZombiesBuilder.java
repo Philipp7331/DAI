@@ -86,14 +86,16 @@ public class JZombiesBuilder implements ContextBuilder<Object> {
 		
 		int messengerCount = params.getInteger("zombie_count");
 		for (int i = 0; i < messengerCount; i++) {
-			Messenger messenger = new Messenger(space, grid, customerList, i, mc, deliveryProbability.get(i));
+			Messenger messenger = new Messenger(space, grid, customerList, i, mc, deliveryProbability.get(i), 
+					initialMessengerPositions.get(i).getX(), initialMessengerPositions.get(i).getY());
 			messengerList.add(messenger);
 			context.add(messenger);
 			grid.moveTo(messenger, initialMessengerPositions.get(i).getX(), initialMessengerPositions.get(i).getY());
 			space.moveTo(messenger, initialMessengerPositions.get(i).getX(), initialMessengerPositions.get(i).getY());
 		}
 		
-		Initiator initiator = new Initiator(space, grid, messengerList, customerList, mc, 1337);
+		int daysToSimulate = params.getInteger("simulation_days");
+		Initiator initiator = new Initiator(space, grid, messengerList, customerList, mc, 1337, daysToSimulate);
 		context.add(initiator);
 				
 		return context;

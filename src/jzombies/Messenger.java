@@ -39,9 +39,11 @@ public class Messenger {
 	public Double unsuccesfulDeliveries;
 	public Double deliveryProbability;
 	public static int ongoingJobs = 0;
+	public int initialX;
+	public int initialY;
 
 	public Messenger(ContinuousSpace<Object> space, Grid<Object> grid, ArrayList<Customer> customerList, 
-			int id, MessageCenter mc, Double deliveryProbability) {
+			int id, MessageCenter mc, Double deliveryProbability, int initialX, int initialY) {
 		this.space = space;
 		this.grid = grid;
 		this.nextGoal = null;
@@ -53,11 +55,12 @@ public class Messenger {
 		this.succesfulDeliveries = 0.0;
 		this.unsuccesfulDeliveries = 0.0;
 		this.deliveryProbability = deliveryProbability;
+		this.initialX = initialX;
+		this.initialY = initialY;
 	}
 
 	@ScheduledMethod(start = 1, interval = 1)
 	public void step() {
-		System.out.println("Next Goal of: " + this.id + " " + nextGoal);
 		
 		// check messages for CFP or ACCEPT_PROPOSAL
 		ArrayList<Customer> potentialNextGoals = new ArrayList<>();
@@ -73,29 +76,22 @@ public class Messenger {
 						msg.getSubject(),
 						FIPA_Performative.PROPOSE,
 						String.valueOf(distanceToCustomer));
-				System.out.println(this.id + " PROPOSED!");
 			}
 			
 			// if initiator accepts one or more proposals set the goal for closest one
 			else if (msg.getPerformative().equals(FIPA_Performative.ACCEPT_PROPOSAL.toString())) {
 				potentialNextGoals.add(getCustomerById(msg.getSubject()));
-				//if (this.id == 1) {
-					//System.out.println("Goals of 1: " + potentialNextGoals.size());
-				//}
-				System.out.println(this.id + " got a job!");
 			}
 		}
 		
 		if (nextGoal == null && nextCustomer == null 
 				&& potentialNextGoals != null) {
 			if (potentialNextGoals.size() == 1) {
-				System.out.println(this.id + "I GOT A CLEAR JOB!");
 				this.nextGoal = grid.getLocation(potentialNextGoals.get(0));
 				this.nextCustomer = potentialNextGoals.get(0);
 				potentialNextGoals = null;
 				ongoingJobs++;
 			} else if (potentialNextGoals.size() > 1){
-				System.out.println(this.id + "I GOT MULTIPLE JOBS!");
 				Customer closestCustomer = getClosestCustomer(potentialNextGoals);
 				this.nextGoal = grid.getLocation(closestCustomer);
 				this.nextCustomer = closestCustomer;
@@ -131,7 +127,6 @@ public class Messenger {
 			grid.moveTo(this, (int) Math.round(myPoint.getX()), (int) Math.round(myPoint.getY()));
 		} else {
 			// either inform-done or failure
-			System.out.println("AT GOAL");
 			Random generator = new Random(1337); 
 			double random = generator.nextDouble();
 			if (random < this.deliveryProbability) {
@@ -139,7 +134,6 @@ public class Messenger {
 			} else {
 				mc.send(this.id, 1337, nextCustomer.getId(), FIPA_Performative.FAILURE, "");
 			}
-			//if (!customerList.isEmpty()) customerList.remove(customer);
 			this.nextGoal = null;
 			this.nextCustomer = null;
 		}
@@ -159,14 +153,8 @@ public class Messenger {
 	
 	public Customer getClosestCustomer(ArrayList<Customer> potentialNextGoals) {
 		if (!potentialNextGoals.isEmpty()) {
-			/*System.out.println("METHOD CALLED BY: " + this.id);
-			System.out.println("potentialNextGoals size: " + potentialNextGoals.size());
-			System.out.println(potentialNextGoals);
-			System.out.println("first elem: " + potentialNextGoals.get(0));*/
 			Customer closestCustomer = potentialNextGoals.get(0);
 			for (Customer customer : potentialNextGoals) {
-				/*System.out.println("Customer: " + customer);
-				System.out.println("Closest Customer: " + closestCustomer);*/
 				if (space.getDistance(space.getLocation(this), space.getLocation(customer))
 						< space.getDistance(space.getLocation(this), space.getLocation(closestCustomer))) {
 					closestCustomer = customer;
@@ -175,6 +163,11 @@ public class Messenger {
 			return closestCustomer;
 		}
 		return null;
+	}
+	
+	public void resetPosition() {
+		grid.moveTo(this, this.initialX, this.initialY);
+		space.moveTo(this, this.initialX, this.initialY);
 	}
 
 	
